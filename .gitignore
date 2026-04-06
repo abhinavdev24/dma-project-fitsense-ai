@@ -1,0 +1,12 @@
+# FitSense AI Dashboard
+.env
+google_credentials.json
+__pycache__/
+*.pyc
+design-system/
+.forge
+.vscode
+.DS_Store
+.pytest_cache
+.mcp.json
+plans
