@@ -1,0 +1,73 @@
+version: "3.8"
+
+services:
+  # FitSense AI Dashboard
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fitsense-dashboard
+    ports:
+      - "8501"
+    environment:
+      - DB_HOST=${DB_HOST:-mysql}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+      - DB_NAME=${DB_NAME:-fitsense_ai}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET:-}
+      - DEMO_MODE=${DEMO_MODE:-false}
+      - DEBUG=${DEBUG:-false}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - fitsense-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # MySQL Database
+  mysql:
+    image: mysql:9.6.0
+    container_name: fitsense-mysql
+    ports:
+      - "3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
+      - MYSQL_DATABASE=${DB_NAME:-fitsense_ai}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/fitsense_ai_data_backup.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - fitsense-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${MYSQL_ROOT_PASSWORD:-password}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  fitsense-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

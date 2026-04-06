@@ -1,0 +1,511 @@
+/* =============================================================================
+   FitSense AI Dashboard - Custom CSS Theme
+   Design System: "Aura Kinetic" adapted for dark mode
+   ============================================================================= */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+
+/* =============================================================================
+   Design Tokens
+   ============================================================================= */
+
+:root {
+    /* Colors - Dark Mode Theme */
+    --color-primary: #1E40AF;
+    --color-secondary: #3B82F6;
+    --color-accent: #F59E0B;
+    --color-accent-alt: #10B981;
+    --color-destructive: #EF4444;
+
+    /* Backgrounds */
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-card: #1E293B;
+    --bg-hover: #334155;
+    --bg-input: #0F172A;
+
+    /* Text */
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --text-on-primary: #FFFFFF;
+
+    /* Borders */
+    --border-color: #334155;
+    --border-light: #475569;
+
+    /* Chart Colors */
+    --chart-blue: #3B82F6;
+    --chart-amber: #F59E0B;
+    --chart-green: #10B981;
+    --chart-red: #EF4444;
+    --chart-purple: #8B5CF6;
+    --chart-pink: #EC4899;
+    --chart-cyan: #06B6D4;
+    --chart-orange: #F97316;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+    --shadow-glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
+    --shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.3);
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 200ms ease;
+    --transition-slow: 300ms ease;
+}
+
+/* =============================================================================
+   Base Styles
+   ============================================================================= */
+
+.stApp {
+    background-color: var(--bg-primary) !important;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+/* =============================================================================
+   Sidebar
+   ============================================================================= */
+
+[data-testid="stSidebar"] {
+    background-color: var(--bg-secondary) !important;
+    border-right: 1px solid var(--border-color);
+}
+
+[data-testid="stSidebarNav"] {
+    padding: var(--space-md);
+}
+
+/* =============================================================================
+   Typography
+   ============================================================================= */
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 600;
+}
+
+/* Page header (used in Weight page) */
+.page-header {
+    color: var(--text-primary) !important;
+    font-size: 1.8rem !important;
+    margin-bottom: var(--space-sm) !important;
+}
+
+code, pre, .sql-console {
+    font-family: 'Fira Code', monospace !important;
+}
+
+/* =============================================================================
+   Cards & Containers
+   ============================================================================= */
+
+[data-testid="stMetric"] {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-lg) !important;
+    box-shadow: var(--shadow-md) !important;
+    transition: all var(--transition-normal) !important;
+}
+
+[data-testid="stMetric"]:hover {
+    box-shadow: var(--shadow-lg) !important;
+    border-color: var(--color-secondary) !important;
+}
+
+/* Card component */
+.fitsense-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.fitsense-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-secondary);
+}
+
+/* Glassmorphism card */
+.glass-card {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+}
+
+/* =============================================================================
+   Buttons
+   ============================================================================= */
+
+.stButton > button {
+    border-radius: var(--radius-md) !important;
+    font-family: 'Fira Sans', sans-serif !important;
+    font-weight: 500 !important;
+    transition: all var(--transition-normal) !important;
+    cursor: pointer !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Primary button */
+.btn-primary {
+    background-color: var(--color-secondary) !important;
+    color: var(--text-on-primary) !important;
+    border: none !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary) !important;
+    box-shadow: var(--shadow-glow-blue) !important;
+}
+
+/* Accent button */
+.btn-accent {
+    background-color: var(--color-accent) !important;
+    color: var(--bg-primary) !important;
+    border: none !important;
+}
+
+.btn-accent:hover {
+    background-color: #D97706 !important;
+    box-shadow: var(--shadow-glow-amber) !important;
+}
+
+/* =============================================================================
+   SQL Console
+   ============================================================================= */
+
+.sql-console {
+    background-color: #0D1117 !important;
+    border: 1px solid var(--color-secondary) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-md) !important;
+    font-family: 'Fira Code', monospace !important;
+    font-size: 13px !important;
+    color: #E2E8F0 !important;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: var(--space-lg) !important;
+}
+
+.sql-console pre {
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* SQL keyword highlighting */
+.sql-keyword {
+    color: #FF79C6;
+    font-weight: 600;
+}
+
+.sql-function {
+    color: #50FA7B;
+}
+
+.sql-string {
+    color: #F1FA8C;
+}
+
+.sql-number {
+    color: #BD93F9;
+}
+
+.sql-comment {
+    color: #6272A4;
+    font-style: italic;
+}
+
+/* =============================================================================
+   Query Type Badges
+   ============================================================================= */
+
+.query-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-simple {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.badge-aggregate {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--chart-blue);
+}
+
+.badge-join {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--chart-green);
+}
+
+.badge-subquery {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: var(--chart-amber);
+}
+
+.badge-correlated {
+    background-color: rgba(139, 92, 246, 0.2);
+    color: var(--chart-purple);
+}
+
+.badge-union {
+    background-color: rgba(236, 72, 153, 0.2);
+    color: var(--chart-pink);
+}
+
+/* =============================================================================
+   Data Tables
+   ============================================================================= */
+
+[data-testid="stDataFrame"] {
+    border-radius: var(--radius-lg) !important;
+    overflow: hidden;
+}
+
+.dataframe {
+    border: none !important;
+}
+
+.dataframe th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: var(--space-md) !important;
+}
+
+.dataframe td {
+    background-color: var(--bg-card) !important;
+    color: var(--text-secondary) !important;
+    padding: var(--space-sm) var(--space-md) !important;
+}
+
+.dataframe tr:hover td {
+    background-color: var(--bg-hover) !important;
+}
+
+/* =============================================================================
+   Form Elements
+   ============================================================================= */
+
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div > div,
+.stNumberInput > div > div > input {
+    background-color: var(--bg-input) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus,
+.stSelectbox > div > div > div:focus,
+.stNumberInput > div > div > input:focus {
+    border-color: var(--color-secondary) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* =============================================================================
+   Tabs
+   ============================================================================= */
+
+.stTabs [data-testid="stTab"] {
+    background-color: transparent !important;
+    color: var(--text-secondary) !important;
+    border-bottom: 2px solid transparent !important;
+}
+
+.stTabs [data-testid="stTab"]:hover {
+    background-color: var(--bg-hover) !important;
+    color: var(--text-primary) !important;
+}
+
+.stTabs [data-testid="stTab"][aria-selected="true"] {
+    color: var(--color-secondary) !important;
+    border-bottom-color: var(--color-secondary) !important;
+}
+
+/* =============================================================================
+   Expanders
+   ============================================================================= */
+
+.streamlit-expanderHeader {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    color: var(--text-primary) !important;
+}
+
+.streamlit-expanderHeader:hover {
+    border-color: var(--color-secondary) !important;
+}
+
+.streamlit-expanderContent {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-top: none !important;
+    border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+}
+
+/* =============================================================================
+   Charts
+   ============================================================================= */
+
+.js-plotly-plot .plotly .modebar {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn {
+    color: var(--text-secondary) !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn:hover {
+    color: var(--text-primary) !important;
+}
+
+/* =============================================================================
+   Progress & Spinners
+   ============================================================================= */
+
+.stSpinner > div {
+    border-color: var(--color-secondary) !important;
+}
+
+/* =============================================================================
+   Alerts & Messages
+   ============================================================================= */
+
+.stAlert {
+    border-radius: var(--radius-md) !important;
+}
+
+/* =============================================================================
+   Scrollbar Styling
+   ============================================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-light);
+}
+
+/* =============================================================================
+   Utilities
+   ============================================================================= */
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--color-accent); }
+
+.bg-card { background-color: var(--bg-card); }
+.bg-secondary { background-color: var(--bg-secondary); }
+
+.cursor-pointer { cursor: pointer; }
+
+.hover-scale:hover {
+    transform: scale(1.02);
+    transition: transform var(--transition-normal);
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fadeIn {
+    animation: fadeIn var(--transition-normal);
+}
+
+.animate-slideUp {
+    animation: slideUp var(--transition-normal);
+}
+
+/* =============================================================================
+   Responsive Adjustments
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    .fitsense-card {
+        padding: var(--space-md);
+    }
+
+    [data-testid="stMetric"] {
+        padding: var(--space-md) !important;
+    }
+}
+
+/* =============================================================================
+   Accessibility
+   ============================================================================= */
+
+/* Focus visible states for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
