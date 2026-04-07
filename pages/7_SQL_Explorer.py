@@ -20,6 +20,7 @@ from utils.db import execute_query, ensure_db_connection
 from utils.queries import QUERIES, QUERY_CATEGORIES, QUERY_METADATA
 from utils.charts import COLOR_PALETTE
 from utils.sidebar import render_sidebar
+from utils.query_validator import validate_readonly_query
 
 # Page configuration
 st.set_page_config(
@@ -253,6 +254,16 @@ def main():
             query = query_input.strip()
 
             if query:
+                # SECURITY: Validate query is read-only before execution
+                is_valid, error_message = validate_readonly_query(query)
+                if not is_valid:
+                    st.error(f"Read-only violation: {error_message}")
+                    st.info(
+                        "This dashboard only supports SELECT queries for read-only data access. "
+                        "Data modification queries (INSERT, UPDATE, DELETE, etc.) are not permitted."
+                    )
+                    return
+
                 start_time = time.time()
 
                 try:
@@ -335,16 +346,18 @@ def main():
 
         st.markdown(
             """
-        <div style="background: rgba(30, 41, 59, 0.5); border-radius: 8px; padding: 15px;">
-            <h4 style="color: #F1F5F9; margin-top: 0;">Common Commands</h4>
+        <div style="background: rgba(30, 41, 59, 0.5); border-radius: 8px; padding: 15px; margin-top: 15px;">
+            <h4 style="color: #F1F5F9; margin-top: 0;">Read-Only Access</h4>
             <ul style="color: #94A3B8; line-height: 1.8;">
-                <li><code style="color: #3B82F6;">SELECT</code> - Retrieve data</li>
-                <li><code style="color: #3B82F6;">WHERE</code> - Filter conditions</li>
-                <li><code style="color: #3B82F6;">JOIN</code> - Combine tables</li>
-                <li><code style="color: #3B82F6;">GROUP BY</code> - Aggregate data</li>
-                <li><code style="color: #3B82F6;">ORDER BY</code> - Sort results</li>
-                <li><code style="color: #3B82F6;">LIMIT</code> - Restrict rows</li>
+                <li><code style="color: #10B981;">SELECT</code> - Allowed (read data)</li>
+                <li><span style="color: #EF4444; text-decoration: line-through;">INSERT</span> - Blocked</li>
+                <li><span style="color: #EF4444; text-decoration: line-through;">UPDATE</span> - Blocked</li>
+                <li><span style="color: #EF4444; text-decoration: line-through;">DELETE</span> - Blocked</li>
+                <li><span style="color: #EF4444; text-decoration: line-through;">DROP</span> - Blocked</li>
             </ul>
+            <p style="color: #94A3B8; margin-top: 10px; font-size: 0.85rem;">
+                This dashboard is configured for read-only access to protect your data.
+            </p>
         </div>
         """,
             unsafe_allow_html=True,
