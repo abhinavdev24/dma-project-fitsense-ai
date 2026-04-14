@@ -162,11 +162,12 @@ def main():
                     title="Average Sleep Duration (All Available Data)",
                 )
                 fig.update_layout(yaxis_title="Hours", xaxis_title="Date", height=400)
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
-                    SLEEP_DURATION_TREND_AGG, "Sleep Duration Trend", "Aggregate + GROUP BY", exec_time
+                    SLEEP_DURATION_TREND_AGG,
+                    "Sleep Duration Trend",
+                    "Aggregate + GROUP BY",
+                    exec_time,
                 )
             else:
                 st.info("No sleep data available.")
@@ -196,10 +197,13 @@ def main():
                 fig.update_layout(
                     xaxis_title="Activity Level", yaxis_title="Sleep Duration (Hours)"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
+                show_sql_console(
+                    SLEEP_BY_ACTIVITY_LEVEL,
+                    "Sleep by Activity",
+                    "INNER JOIN",
+                    exec_time,
                 )
-                show_sql_console(SLEEP_BY_ACTIVITY_LEVEL, "Sleep by Activity", "INNER JOIN", exec_time)
             else:
                 st.info("No sleep by activity data available.")
         except Exception as e:
@@ -244,10 +248,10 @@ def main():
                 fig.update_layout(
                     xaxis_title="Day of Week", yaxis_title="Average Sleep (Hours)"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
+                show_sql_console(
+                    SLEEP_BY_DAY_OF_WEEK, "Sleep by Day", "Aggregate", exec_time
                 )
-                show_sql_console(SLEEP_BY_DAY_OF_WEEK, "Sleep by Day", "Aggregate", exec_time)
             else:
                 st.info("No day-of-week data available.")
         except Exception as e:
@@ -267,8 +271,10 @@ def main():
             exec_time = time.time() - start_time
 
             if not df.empty:
-                st.dataframe(df, width='stretch', hide_index=True)
-                show_sql_console(SLEEP_USERS_EXCEEDING_TARGET, "Exceeding Target", "> ANY", exec_time)
+                st.dataframe(df, width="stretch", hide_index=True)
+                show_sql_console(
+                    SLEEP_USERS_EXCEEDING_TARGET, "Exceeding Target", "> ANY", exec_time
+                )
             else:
                 st.info("No users exceeding sleep targets.")
         except Exception as e:
@@ -288,8 +294,13 @@ def main():
             exec_time = time.time() - start_time
 
             if not df.empty:
-                st.dataframe(df, width='stretch', hide_index=True)
-                show_sql_console(SLEEP_USERS_NEVER_LOGGED, "Never Logged Sleep", "NOT EXISTS", exec_time)
+                st.dataframe(df, width="stretch", hide_index=True)
+                show_sql_console(
+                    SLEEP_USERS_NEVER_LOGGED,
+                    "Never Logged Sleep",
+                    "NOT EXISTS",
+                    exec_time,
+                )
             else:
                 st.info("All users have logged sleep data.")
         except Exception as e:
@@ -310,8 +321,10 @@ def main():
 
             if not df.empty:
                 df["log_date"] = pd.to_datetime(df["log_date"]).dt.strftime("%Y-%m-%d")
-                st.dataframe(df, width='stretch', hide_index=True)
-                show_sql_console(SLEEP_RECENT_LOGS, "Recent Logs", "INNER JOIN", exec_time)
+                st.dataframe(df, width="stretch", hide_index=True)
+                show_sql_console(
+                    SLEEP_RECENT_LOGS, "Recent Logs", "INNER JOIN", exec_time
+                )
             else:
                 st.info("No recent sleep data available.")
         except Exception as e:

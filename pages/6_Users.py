@@ -152,9 +152,7 @@ def main():
                 fig = create_pie_chart(
                     df, values="total", names="sex", title="User Distribution by Sex"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     A2_USERS_BY_SEX, "Sex Distribution", "Aggregate", exec_time
                 )
@@ -183,9 +181,7 @@ def main():
                     names="activity_level",
                     title="User Activity Level Distribution (with Percentages)",
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     SF2_ACTIVITY_LEVEL_WITH_PERCENTAGE,
                     "Activity Level",
@@ -217,9 +213,7 @@ def main():
                 fig.update_layout(
                     xaxis_title="Age Group", yaxis_title="Number of Users"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     A4_AGE_DISTRIBUTION,
                     "Age Distribution",
@@ -265,9 +259,7 @@ def main():
                     fig.update_layout(
                         xaxis_title="Age (years)", yaxis_title="Height (cm)"
                     )
-                    st.plotly_chart(
-                        fig, config=get_chart_config(), width='stretch'
-                    )
+                    st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                     show_sql_console(
                         J1_USER_PROFILES_DEMOGRAPHICS,
                         "Age vs Height",
@@ -303,9 +295,7 @@ def main():
                     color_discrete_sequence=["#3B82F6", "#EC4899"],
                 )
                 fig.update_layout(xaxis_title="Sex", yaxis_title="Average Height (cm)")
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     A3_AVG_HEIGHT_BY_SEX, "Avg Height by Sex", "Aggregate", exec_time
                 )
@@ -337,9 +327,7 @@ def main():
                     color_discrete_sequence=["#8B5CF6"],
                 )
                 fig.update_layout(xaxis_title="Number of Goals", yaxis_title="User")
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     C2_USERS_WITH_MORE_GOALS_THAN_AVG,
                     "Goals Above Average",

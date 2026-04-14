@@ -211,6 +211,14 @@ def main():
 
         with col1:
             st.page_link(
+                "pages/8_NoSQL_Explorer.py",
+                label="📦 **NoSQL Explorer**",
+                width='stretch',
+            )
+            st.caption("Execute MongoDB aggregation queries and explore NoSQL data")
+
+        with col2:
+            st.page_link(
                 "pages/3_Nutrition.py",
                 label="🍎 **Nutrition Tracking**",
                 width='stretch',
