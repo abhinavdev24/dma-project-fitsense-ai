@@ -25,6 +25,7 @@ def render_sidebar():
         st.page_link("pages/5_Weight.py", label="Weight", icon="⚖️")
         st.page_link("pages/6_Users.py", label="Users", icon="👥")
         st.page_link("pages/7_SQL_Explorer.py", label="SQL Explorer", icon="🔍")
+        st.page_link("pages/8_NoSQL_Explorer.py", label="NoSQL Explorer", icon="📦")
 
         st.divider()
 

@@ -150,9 +150,7 @@ def main():
                 fig.update_layout(
                     xaxis_title="Duration (minutes)", yaxis_title="Number of Users"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     A8_AVG_WORKOUT_DURATION,
                     "Workout Duration",
@@ -203,9 +201,7 @@ def main():
                 fig.update_layout(
                     xaxis_title="Day of Week", yaxis_title="Total Workouts"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     A5_WORKOUTS_PER_DAY, "Workouts by Day", "Aggregate", exec_time
                 )
@@ -239,9 +235,7 @@ def main():
                 fig.update_layout(
                     xaxis_title="Times Used in Plans", yaxis_title="Exercise"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     J2_MOST_USED_EXERCISES,
                     "Most Used Exercises",
@@ -275,9 +269,7 @@ def main():
                     color_discrete_sequence=["#EC4899"],
                 )
                 fig.update_layout(xaxis_title="Reps", yaxis_title="Weight")
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     N2_HEAVIEST_LIFTS_ABOVE_AVG,
                     "Heaviest Lifts",
@@ -311,9 +303,7 @@ def main():
                     color_discrete_sequence=["#8B5CF6"],
                 )
                 fig.update_layout(xaxis_title="User", yaxis_title="Total Workouts")
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
                     N1_USERS_ABOVE_AVERAGE_WORKOUTS,
                     "Above Average Users",

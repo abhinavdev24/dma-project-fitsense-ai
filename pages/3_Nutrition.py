@@ -4,25 +4,23 @@ FitSense AI Dashboard - Nutrition Page
 Analytics for nutrition tracking data.
 """
 
-import streamlit as st
 import sys
 from pathlib import Path
 import time
+import streamlit as st
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
-
-# Import utilities
 from utils.db import execute_query, ensure_db_connection
 from utils.charts import (
     create_line_chart,
     create_bar_chart,
-    create_scatter_chart,
     create_histogram,
-    CHART_COLORS,
     get_chart_config,
 )
+
+# Import utilities
 from utils.sql_console import show_sql_console
 from utils.sidebar import render_sidebar
 from utils.queries import (
@@ -165,11 +163,12 @@ def main():
                 fig.update_layout(
                     yaxis_title="Calories", xaxis_title="Date", height=400
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
-                    NUTRITION_INTAKE_TREND_30D, "Calorie Intake Trend", "Aggregate + GROUP BY", exec_time
+                    NUTRITION_INTAKE_TREND_30D,
+                    "Calorie Intake Trend",
+                    "Aggregate + GROUP BY",
+                    exec_time,
                 )
             else:
                 st.info("No recent calorie data available.")
@@ -196,10 +195,13 @@ def main():
                     fig = create_bar_chart(
                         df, x="name", y="total_calories", title="Weekly Calorie Totals"
                     )
-                    st.plotly_chart(
-                        fig, config=get_chart_config(), width='stretch'
+                    st.plotly_chart(fig, config=get_chart_config(), width="stretch")
+                    show_sql_console(
+                        NUTRITION_TOP_USERS_TOTAL,
+                        "Weekly Totals",
+                        "INNER JOIN",
+                        exec_time,
                     )
-                    show_sql_console(NUTRITION_TOP_USERS_TOTAL, "Weekly Totals", "INNER JOIN", exec_time)
                 else:
                     st.info("No weekly calorie data available.")
             except Exception as e:
@@ -221,11 +223,12 @@ def main():
                         title="Average Calorie Intake (Top 10)",
                         color_discrete_sequence=["#10B981"],
                     )
-                    st.plotly_chart(
-                        fig, config=get_chart_config(), width='stretch'
-                    )
+                    st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                     show_sql_console(
-                        NUTRITION_TOP_USERS_AVG, "Top Users", "INNER JOIN + Aggregate", exec_time
+                        NUTRITION_TOP_USERS_AVG,
+                        "Top Users",
+                        "INNER JOIN + Aggregate",
+                        exec_time,
                     )
                 else:
                     st.info("No user calorie data available.")
@@ -270,10 +273,10 @@ def main():
                 fig.update_layout(
                     xaxis_title="Day of Week", yaxis_title="Average Calories"
                 )
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
+                show_sql_console(
+                    NUTRITION_BY_DAY_OF_WEEK, "By Day of Week", "Aggregate", exec_time
                 )
-                show_sql_console(NUTRITION_BY_DAY_OF_WEEK, "By Day of Week", "Aggregate", exec_time)
             else:
                 st.info("No day-of-week data available.")
         except Exception as e:
@@ -301,11 +304,12 @@ def main():
                     nbins=30,
                 )
                 fig.update_layout(xaxis_title="Calories", yaxis_title="Frequency")
-                st.plotly_chart(
-                    fig, config=get_chart_config(), width='stretch'
-                )
+                st.plotly_chart(fig, config=get_chart_config(), width="stretch")
                 show_sql_console(
-                    NUTRITION_DISTRIBUTION, "Calorie Distribution", "Simple Query", exec_time
+                    NUTRITION_DISTRIBUTION,
+                    "Calorie Distribution",
+                    "Simple Query",
+                    exec_time,
                 )
             else:
                 st.info("No calorie distribution data available.")
@@ -327,8 +331,10 @@ def main():
 
             if not df.empty:
                 df["log_date"] = pd.to_datetime(df["log_date"]).dt.strftime("%Y-%m-%d")
-                st.dataframe(df, width='stretch', hide_index=True)
-                show_sql_console(NUTRITION_RECENT_LOGS, "Recent Logs", "INNER JOIN", exec_time)
+                st.dataframe(df, width="stretch", hide_index=True)
+                show_sql_console(
+                    NUTRITION_RECENT_LOGS, "Recent Logs", "INNER JOIN", exec_time
+                )
             else:
                 st.info("No recent calorie data available.")
         except Exception as e:
@@ -348,8 +354,10 @@ def main():
             exec_time = time.time() - start_time
 
             if not df.empty:
-                st.dataframe(df, width='stretch', hide_index=True)
-                show_sql_console(NUTRITION_USER_TARGETS, "Calorie Targets", "INNER JOIN", exec_time)
+                st.dataframe(df, width="stretch", hide_index=True)
+                show_sql_console(
+                    NUTRITION_USER_TARGETS, "Calorie Targets", "INNER JOIN", exec_time
+                )
             else:
                 st.info("No calorie target data available.")
         except Exception as e:
